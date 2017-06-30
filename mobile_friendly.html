@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Multiplication Circle Demo</title>
+        <meta name="viewport" content="initial-scale=1">
+        <script src="mod_circle_min.js" type="text/javascript"></script>
+        <script src="dat_gui_min.js" type="text/javascript"></script>
+		<link rel='stylesheet' href='main.css'>
+    </head>
+    <body>
+        <canvas id="mod" width="200" height="200">
+        <script type="text/javascript">
+			var mod = new ModCircle(document.getElementById('mod'));
+			mod.ctx.fillStyle = '#222';
+			mod.ctx.strokeStyle = '#fff';
+			mod.lineCtx.strokeStyle = '#fff';
+			var gui = new dat.GUI();
+			function update() {
+				mod.paint();
+			}
+			var animation = {
+				baseTo: 0,
+				factorTo: 0,
+				duration: 10,
+				repeat: false,
+				On: false
+			}
+			function toggleAnime() {
+				if (animation.On)
+					mod.animate(animation.baseTo, animation.factorTo,
+							animation.duration * 1000, animation.repeat);
+				else
+					mod.stopAnimation();
+			}
+			gui.add(mod, 'base', -1000, 1000).listen();
+			gui.add(mod, 'factor', -1000, 1000).listen();
+			var circle = gui.addFolder('Circle');
+			circle.add(mod.ctx, 'lineWidth', 1, 20).onChange(update);
+			circle.addColor(mod.ctx, 'strokeStyle').onChange(update);
+			circle.addColor(mod.ctx, 'fillStyle').onChange(update);
+			var lines = gui.addFolder('Lines');
+			lines.add(mod.lineCtx, 'lineWidth', 1, 20).onChange(update);
+			lines.addColor(mod.lineCtx, 'strokeStyle').onChange(update);
+			var anime = gui.addFolder('Animation');
+			anime.add(animation, 'baseTo', -1000, 1000).onChange(toggleAnime);
+			anime.add(animation, 'factorTo', -1000, 1000).onChange(toggleAnime);
+			anime.add(animation, 'duration', -1000, 1000).onChange(toggleAnime);
+			anime.add(animation, 'repeat').onChange(toggleAnime);
+			anime.add(animation, 'On').onChange(toggleAnime);
+        </script>
+
+    </body>
+</html>
