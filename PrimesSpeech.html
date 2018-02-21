@@ -1,0 +1,105 @@
+<!doctype html>
+<!-- Please do not look at this source code it's really awful forgive me -->
+<html>
+	<head>
+		<title>Primes</title>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='main.css'>
+	</head>
+	<body>
+		<div class='cover-table'>
+			<table border='1' class='prime-table'>
+				<tbody id='all-nums'>
+				
+				</tbody>
+			</table>
+		</div>
+		<div class='cover-table'>
+			<table border='1' class='prime-table'>
+				<tbody id='prime-nums'>
+				
+				</tbody>
+			</table>
+		</div>
+		<div class='cover-table'>
+			<table border='1' class='prime-table'>
+				<tbody id='color-nums'>
+				
+				</tbody>
+			</table>
+		</div>
+		<script language='javascript'>
+			function isPrime(num) {
+				var primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199];
+				
+				for (var i = 0; i < primes.length; i++) {
+					if (num == primes[i]) {
+						return true;
+					}
+				}
+				return false;
+			}
+			function populateAllNums(num, tableBody, numCells) {
+				row = document.createElement("tr");
+				for (var i = 0; i < numCells; i++) {
+					cell = document.createElement("td");
+					cell.classList.add('prime-cell');
+					text = document.createTextNode(num + i);
+					cell.appendChild(text);
+					row.appendChild(cell);
+				}
+				tableBody.appendChild(row);
+			}
+			function populatePrimeNums(num, tableBody, numCells) {
+				row = document.createElement("tr");
+				for (var i = 0; i < numCells; i++) {
+					cell = document.createElement("td");
+					cell.classList.add('prime-cell');
+					if (isPrime(num + i)) {
+						text = document.createTextNode(num + i);
+					}
+					else {
+						text = document.createTextNode("");
+					}
+					cell.appendChild(text);
+					row.appendChild(cell);
+				}
+				tableBody.appendChild(row);
+			}
+			function populateColorNums(num, tableBody, numCells) {
+				row = document.createElement("tr");
+				for (var i = 0; i < numCells; i++) {
+					cell = document.createElement("td");
+					cell.classList.add('prime-cell');
+					if (isPrime(num + i)) {
+						// Set background color to black
+						cell.style.backgroundColor = '#000';
+					}
+					else {
+						// Set background color to white
+						cell.style.backgroundColor = '#fff';
+					}
+					row.appendChild(cell);
+				}
+				tableBody.appendChild(row);
+				
+			}
+			
+			allNums = document.getElementById("all-nums");
+			primeNums = document.getElementById("prime-nums");
+			colorNums = document.getElementById("color-nums");
+			
+			for (var i = 1; i < 205; i += 6) {
+				populateAllNums(i, allNums, 6);
+			}
+			
+			for (var i = 1; i < 205; i += 6) {
+				populatePrimeNums(i, primeNums, 6);
+			}
+			
+			for (var i = 1; i < 205; i += 6) {
+				populateColorNums(i, colorNums, 6);
+			}
+		</script>
+	</body>
+</html>

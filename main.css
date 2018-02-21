@@ -1,6 +1,24 @@
-html {
-	background-color: #222;
+.cover-table {
+	display: inline-block;
+	z-index: 100;
+	opacity: 0;
+	transition: opacity 0.2s linear;
 }
-canvas#mod {
-	background: #222;
+
+.cover-table:hover {
+	opacity: 1;
+}
+
+.prime-table {
+	width: 200px;
+	height: 848.2px;
+	display: inline-block;
+	margin-left: 220px;
+	border: 2px solid black;
+}
+
+.prime-cell {
+	width: 30px;
+	height: 19.2px;
+	text-align: center;
 }
